@@ -1,17 +1,17 @@
-esx_mumblelocal voiceData = {}
+local voiceData = {}
 local radioData = {}
 local callData = {}
 
 local playerServerId = GetPlayerServerId(PlayerId())
 
--- Funções
+-- Functions
 function SetVoiceData(key, value)
-	TriggerServerEvent("esx_mumble:SetVoiceData", key, value)
+	TriggerServerEvent("mumble:SetVoiceData", key, value)
 end
 
--- Eventos
-RegisterNetEvent("esx_mumble:SetVoiceData")
-AddEventHandler("esx_mumble:SetVoiceData", function(voice, radio, call)
+-- Events
+RegisterNetEvent("mumble:SetVoiceData")
+AddEventHandler("mumble:SetVoiceData", function(voice, radio, call)
 	voiceData = voice
 
 	if radio then
@@ -23,8 +23,8 @@ AddEventHandler("esx_mumble:SetVoiceData", function(voice, radio, call)
 	end
 end)
 
-RegisterNetEvent("esx_mumble:RadioSound")
-AddEventHandler("esx_mumble:RadioSound", function(snd, channel)
+RegisterNetEvent("mumble:RadioSound")
+AddEventHandler("mumble:RadioSound", function(snd, channel)
 	if channel <= mumbleConfig.radioClickMaxChannel then
 		if mumbleConfig.micClicks then
 			if (snd and mumbleConfig.micClickOn) or (not snd and mumbleConfig.micClickOff) then
@@ -39,10 +39,10 @@ AddEventHandler("onClientResourceStart", function (resourceName)
 		return
 	end
 
-	TriggerServerEvent("esx_mumble:Initialise")
+	TriggerServerEvent("mumble:Initialise")
 end)
 
--- Simule PTT quando o rádio estiver ativo
+-- Simulate PTT when radio is active
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(0)
@@ -61,7 +61,7 @@ Citizen.CreateThread(function()
 			playerCallSpeaker = playerData.callSpeaker or false
 		end
 
-		if playerRadioActive then -- Forçar PTT ativado
+		if playerRadioActive then -- Force PTT enabled
 			SetControlNormal(0, 249, 1.0)
 			SetControlNormal(1, 249, 1.0)
 			SetControlNormal(2, 249, 1.0)
@@ -70,15 +70,15 @@ Citizen.CreateThread(function()
 		if IsControlJustPressed(0, mumbleConfig.controls.proximity.key) then
 			if mumbleConfig.controls.speaker.key == mumbleConfig.controls.proximity.key and not ((mumbleConfig.controls.speaker.secondary == nil) and true or IsControlPressed(0, mumbleConfig.controls.speaker.secondary)) then
 				local voiceMode = playerMode
-
+			
 				local newMode = voiceMode + 1
-
+			
 				if newMode > #mumbleConfig.voiceModes then
 					voiceMode = 1
 				else
 					voiceMode = newMode
 				end
-
+			
 				SetVoiceData("mode", voiceMode)
 			end
 		end
@@ -155,7 +155,7 @@ Citizen.CreateThread(function()
 	end
 end)
 
--- thread principal
+-- Main thread
 Citizen.CreateThread(function()
 	local talkingAnim = { "mic_chatter", "mp_facial" }
 	local normalAnim = { "mood_normal_1", "facials@gen_male@base" }
@@ -193,7 +193,7 @@ Citizen.CreateThread(function()
 		local callList = {}
 		local radioList = {}
 
-		for i = 1, #playerList do -- Voz baseada em proximidade (provavelmente não funcionará para o infinito?)
+		for i = 1, #playerList do -- Proximity based voice (probably won't work for infinity?)
 			local remotePlayerId = playerList[i]
 
 			if playerId ~= remotePlayerId then
@@ -217,7 +217,7 @@ Citizen.CreateThread(function()
 					callSpeaker = remotePlayerData.callSpeaker or false
 				end
 
-				-- Verifique se o jogador está dentro do alcance
+				-- Check if player is in range
 				if distance < mumbleConfig.voiceModes[mode][1] then
 					local volume = 1.0 - (distance / mumbleConfig.voiceModes[mode][1])^0.5
 
@@ -232,7 +232,7 @@ Citizen.CreateThread(function()
 					}
 
 					if mumbleConfig.callSpeakerEnabled then
-						if call > 0 then -- Colete todos os jogadores na ligação
+						if call > 0 then -- Collect all players in the phone call
 							if callSpeaker then
 								local callParticipants = callData[call]
 								if callParticipants ~= nil then
@@ -245,9 +245,9 @@ Citizen.CreateThread(function()
 							end
 						end
 					end
-
+					
 					if mumbleConfig.radioSpeakerEnabled then
-						if radio > 0 then -- Colete todos os jogadores no canal de rádio
+						if radio > 0 then -- Collect all players in the radio channel
 							local radioParticipants = radioData[radio]
 							if radioParticipants then
 								for id, _ in pairs(radioParticipants) do
@@ -267,7 +267,7 @@ Citizen.CreateThread(function()
 						radioActive = radioActive,
 						distance = distance,
 						call = call,
-					}
+					}					
 				end
 			end
 		end
@@ -290,13 +290,13 @@ Citizen.CreateThread(function()
 			if muteList[j].call > 0 and muteList[j].call == playerCall then
 				muteList[j].volume = 1.2
 			end
-
+			
 			MumbleSetVolumeOverride(muteList[j].player, muteList[j].volume)
 		end
 	end
 end)
 
--- Exportações
+-- Exports
 function SetRadioChannel(channel)
 	local channel = tonumber(channel)
 

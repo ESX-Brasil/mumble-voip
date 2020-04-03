@@ -1,6 +1,6 @@
-# esx_mumble_voip
+# mumble-voip
 
-Uma substituição do tokovoip que usa o fivems mumble voip
+Uma substituição do tokovoip para que usa o fivem mumble voip
 
 - Rádios (um canal de rádio por jogador por enquanto)
 - Cliques de microfone de rádio
@@ -9,6 +9,13 @@ Uma substituição do tokovoip que usa o fivems mumble voip
 - Alternar modo Alto-falante do telefone
 - Ouvir chamadas e rádios próximos
 - HTML UI
+
+# Eu usei esses convars ao testar:
+
+```
+setr voice_use3dAudio true
+setr voice_useSendingRangeOnly true
+```
 
 ### Exportações
 Setters

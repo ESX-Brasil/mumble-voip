@@ -1,41 +1,41 @@
 mumbleConfig = {
     voiceModes = {
-        {2.5, "Whisper"}, -- Distância de voz sussurrante em unidades de distância gta
-        {8, "Normal"}, -- Distância normal de fala em unidades de distância gta
-        {20, "Shouting"}, -- distância discurso grito em unidades de distância gta
+        {2.5, "Whisper"}, -- Whisper speech distance in gta distance units
+        {8, "Normal"}, -- Normal speech distance in gta distance units
+        {20, "Shouting"}, -- Shout speech distance in gta distance units
     },
-    speakerRange = 1.5, -- Distância do alto-falante em unidades de distância gta (a que distância você está de outro jogador para ouvir outros jogadores no rádio ou telefone)
-    callSpeakerEnabled = true, -- Permita que os jogadores ouçam todos os participantes falantes de uma ligação, se estiverem ao lado de alguém que está ao telefone
-    radioSpeakerEnabled = true, -- Permita que os jogadores ouçam todos os participantes falantes de um rádio se estiverem ao lado de alguém que tenha um rádio
-    radioEnabled = true, -- Ativar ou desativar o uso do rádio
-    micClicks = true, -- Os cliques estão ativados ou não
-    micClickOn = true, -- O som do clique está ativo
+    speakerRange = 1.5, -- Speaker distance in gta distance units (how close you need to be to another player to hear other players on the radio or phone)
+    callSpeakerEnabled = true, -- Allow players to hear all talking participants of a phone call if standing next to someone that is on the phone
+    radioSpeakerEnabled = true, -- Allow players to hear all talking participants in a radio if standing next to someone that has a radio
+    radioEnabled = true, -- Enable or disable using the radio
+    micClicks = true, -- Are clicks enabled or not
+    micClickOn = true, -- Is click sound on active
     micClickOff = true, -- Is click sound off active
-    micClickVolume = 0.1, -- Quão alto é o clique de um microfone
-    radioClickMaxChannel = 100, -- Defina a quantidade máxima de canais de rádio que terão cliques de rádio locais ativados
-    controls = { -- Alterar ligações de chave padrão
+    micClickVolume = 0.1, -- How loud a mic click is
+    radioClickMaxChannel = 100, -- Set the max amount of radio channels that will have local radio clicks enabled
+    controls = { -- Change default key binds
         proximity = {
             key = 20, -- Z
-        }, -- Alternar modo de proximidade
+        }, -- Switch proximity mode
         radio = {
-            pressed = false, -- não toque
+            pressed = false, -- don't touch
             key = 137, -- capital
-        }, -- Use rádio
+        }, -- Use radio
         speaker = {
             key = 20, -- Z
             secondary = 21, -- LEFT SHIFT
-        } -- Alternar modo alto-falante (chamadas telefônicas)
+        } -- Toggle speaker mode (phone calls)
     },
-    radioChannelNames = { -- Adicionar canais de rádio nomeados (o padrão é [número do canal] MHz)
-        [1] = "Policia 1",
-        [2] = "Policia2",
+    radioChannelNames = { -- Add named radio channels (Defaults to [channel number] MHz)
+        [1] = "PM 1",
+        [2] = "PM 2",
         [3] = "EMS 1",
         [4] = "EMS 2",
-        [500] = "Sala dos 500",
+        [500] = "Sala Publica",
     }
 }
 
--- Atualizar propriedades de configuração de outro script
+-- Update config properties from another script
 function SetMumbleProperty(key, value)
 	if mumbleConfig[key] ~= nil and mumbleConfig[key] ~= "controls" and mumbleConfig[key] ~= "radioChannelNames" then
 		mumbleConfig[key] = value
@@ -52,7 +52,7 @@ function AddRadioChannelName(channel, name)
     end
 end
 
--- Disponibilizar exportações à primeira escala
+-- Make exports available on first tick
 exports("SetMumbleProperty", SetMumbleProperty)
 exports("SetTokoProperty", SetMumbleProperty)
 exports("AddRadioChannelName", AddRadioChannelName)
