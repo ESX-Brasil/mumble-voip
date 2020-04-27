@@ -42,3 +42,19 @@ Exportações TokoVOIP suportadas
 @Itokoyamato pelo TokoVOIP
 
 @Nardah e @crunchFiveM pelo teste
+
+# Servidores Iceline Hosting e ESX Brasil
+
+![Iceline hosting](https://cdn.discordapp.com/attachments/704310570098229309/704331510203023490/banner.gif)
+
+Você está pensando em abrir um servidor FiveM por conta própria? 
+[Iceline Hosting](https://iceline-hosting.com/billing/aff.php?aff=122) fornece servidores de jogos, VPS de jogos de ponta com proteção contra DDoS incluída e muito mais!
+
+Existe um complemento de suporte gerenciado opcional disponível para servidores de jogos e VPS de jogos que adicionam os seguintes serviços:
+
+- Investigação e correção de erros em relação ao servidor ou scripts de terceiros
+- Instalando scripts ou software de terceiros
+- Recuperação de dados perdidos
+
+Vá para [Iceline Hosting](https://iceline-hosting.com/billing/aff.php?aff=122) e use o código promocional `ESXBRAZIL` para ganha 20% no primeiro mês em servidor.
+Ele da descontos em outros serviços da empresa.
