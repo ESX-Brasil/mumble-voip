@@ -58,3 +58,7 @@ Existe um complemento de suporte gerenciado opcional disponível para servidores
 
 Vá para [Iceline Hosting](https://iceline-hosting.com/billing/aff.php?aff=122) e use o código promocional `ESXBRAZIL` para ganha 20% no primeiro mês em servidor.
 Ele da descontos em outros serviços da empresa.
+
+## Discord
+
+https://discord.gg/ZGXTsdN
